@@ -1,13 +1,15 @@
 import './App.css';
-import Navbar from './navbar';
+import Home from './Home';
+import Navbar from './Navbar';
 
 //jsx permite usar o código html no typescript
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
-    </div>
+      <Home />
+    </>
   );
 }
 
