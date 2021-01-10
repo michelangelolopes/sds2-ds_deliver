@@ -38,26 +38,26 @@ function Orders(){
     }
 
     const handleSubmit = () => {
-    const productsIds = selectedProducts.map(({ id }) => ({ id }));
-    const payload = {
-        ...orderLocation!,
-        products: productsIds
-    }
-
-    if (payload.products.length == 0)
-            toast.warning('Nenhum produto selecionado')
-    else if (payload.address == null)
-        toast.warning('Nenhum endereço selecionado')
-    else
-        saveOrder(payload)
-            .then((response) => {
-                toast.error(`Pedido enviado com sucesso! Nº ${response.data.id}`);
-                setSelectedProducts([]);
-            })
-            .catch(() => {
-                toast.warning('Erro ao enviar pedido');
-            })
+        const productsIds = selectedProducts.map(({ id }) => ({ id }));
+        const payload = {
+            ...orderLocation!,
+            products: productsIds
         }
+
+        if (payload.products.length == 0)
+                toast.warning('Nenhum produto selecionado')
+        else if (payload.address == null)
+            toast.warning('Nenhum endereço selecionado')
+        else
+            saveOrder(payload)
+                .then((response) => {
+                    toast.error(`Pedido enviado com sucesso! Nº ${response.data.id}`);
+                    setSelectedProducts([]);
+                })
+                .catch(() => {
+                    toast.warning('Erro ao enviar pedido');
+                })
+    }
 
     return(
         <>
