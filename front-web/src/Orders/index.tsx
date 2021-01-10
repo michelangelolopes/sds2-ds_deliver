@@ -44,9 +44,9 @@ function Orders(){
             products: productsIds
         }
 
-        if (payload.products.length == 0)
+        if (payload.products.length === 0)
                 toast.warning('Nenhum produto selecionado')
-        else if (payload.address == null)
+        else if (payload.address === null)
             toast.warning('Nenhum endereço selecionado')
         else
             saveOrder(payload)
