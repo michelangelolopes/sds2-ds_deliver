@@ -14,6 +14,7 @@ function Orders(){
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
     const [orderLocation, setOrderLocation] = useState<OrderLocationData>();
+    const [redirectUri, setRedirectUri] = useState<boolean>(false)
     const totalPrice = selectedProducts.reduce((sum, item) => {
         return sum + item.price;
     }, 0)
@@ -25,6 +26,11 @@ function Orders(){
                 toast.warning('Erro ao listar os produtos')
             })
     }, []);
+
+    useEffect(() => {
+        if(orderLocation !== undefined && selectedProducts.length !==0)
+            setRedirectUri(true)
+    }, [orderLocation, selectedProducts])
 
     const handleSelectProduct = (product: Product) => {
         const isAlreadySelected = checkIsSelected(selectedProducts, product)
@@ -45,7 +51,7 @@ function Orders(){
         }
 
         if (payload.products.length === 0)
-                toast.warning('Nenhum produto selecionado')
+            toast.warning('Nenhum produto selecionado')
         else if (payload.address == null)
             toast.warning('Nenhum endereço selecionado')
         else
@@ -75,6 +81,7 @@ function Orders(){
                     amount={selectedProducts.length}
                     totalPrice={totalPrice}
                     onSubmit={handleSubmit}
+                    redirectUri={redirectUri}
                 />
             </div>
             <Footer></Footer>

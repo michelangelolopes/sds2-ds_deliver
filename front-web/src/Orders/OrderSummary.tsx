@@ -1,12 +1,14 @@
 import { formatPrice } from "./helpers";
+import { Link } from 'react-router-dom';
 
 type Props = {
     amount: number;
     totalPrice: number;
     onSubmit: () => void
+    redirectUri: boolean
 }
 
-function OrderSummary({ amount, totalPrice, onSubmit }: Props){
+function OrderSummary({ amount, totalPrice, onSubmit, redirectUri }: Props){
     return (
         <div className="order-summary-container">
             <div className="order-summary-content">
@@ -22,12 +24,22 @@ function OrderSummary({ amount, totalPrice, onSubmit }: Props){
                         VALOR TOTAL
                     </span>
                 </div>
-                <button 
-                    className="order-summary-make-order"
-                    onClick={onSubmit}
-                >
-                FAZER PEDIDO
-                </button>
+                {redirectUri ? (
+                    <Link 
+                        to="/"
+                        className="order-summary-make-order"
+                        onClick={onSubmit}
+                    >
+                        FAZER PEDIDO
+                    </Link>
+                ):(
+                    <button 
+                        className="order-summary-make-order"
+                        onClick={onSubmit}
+                    >
+                        FAZER PEDIDO
+                    </button>
+                )}
             </div>
         </div>
     )
